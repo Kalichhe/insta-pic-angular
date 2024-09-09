@@ -1,0 +1,16 @@
+<header>
+@if(true){
+    <h1>InstaPic</h1>
+}@else {
+    <nav>
+        <ul>
+            <li>InstaPic</li>
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">Mi perfil</a></li>
+            <li><a href="#">Buscar</a></li>
+            <li><a href="#">Nueva Publicacion</a></li>
+            <li><a [routerLink]="['/login']">Cerrar sesion</a></li>
+        </ul>
+    </nav>
+}
+</header>
