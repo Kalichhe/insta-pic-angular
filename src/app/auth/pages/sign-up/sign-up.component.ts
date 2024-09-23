@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -20,8 +20,7 @@ export class SignUpComponent {
         reTypePassword:['', [Validators.required]]
     });
 
-    userService = inject(UserService);
-
+    userService = new UserService(); // Hacer esto tambien en el login
     constructor(private fb:FormBuilder, private router:Router) { }
 
     onRegister(){
@@ -36,6 +35,7 @@ export class SignUpComponent {
 
         const userName = this.signUpForm.value.userName;
         const password = this.signUpForm.value.password;
+        const email = this.signUpForm.value.email;
         const reTypePassword = this.signUpForm.value.reTypePassword;
 
         if(password !== reTypePassword){
@@ -43,13 +43,16 @@ export class SignUpComponent {
             return;
         }
 
-        if (localStorage.getItem(userName!.trim().toLowerCase())) {
-            alert('El usuario ya existe');
-            return;
-        }
+        const response = this.userService.register({userName:userName!, password:password!, email:email!});
 
-        localStorage.setItem(userName!.trim().toLowerCase(), password!);
-        this.router.navigateByUrl('/home');
+        if(response.success){
+            this.router.navigateByUrl('/home');
+        } else {
+            Swal.fire({
+                title: response.message,
+                icon: "error"
+              });
+        }
     }
 
 }
