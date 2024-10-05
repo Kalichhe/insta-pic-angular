@@ -1,0 +1,5 @@
+<section>
+  <label for="fileToUpload">Seleccione un archivo</label>
+  <input type="file" (change)="onUpload($event)" id="fileToUpload"/>
+  <img [src]="uploadedUrl" alt="">
+</section>

@@ -1,35 +1,29 @@
 <div class="login-box">
-    <h2>Registrar usuario</h2>
-    <form [formGroup]="signUpForm">
-        <input
-        id="email"
-        type="email"
-        formControlName="email"
-        class="input-text"
-        placeholder="Email"
-        />
-        <input
-        id="userName"
-        type="text"
-        formControlName="userName"
-        class="input-text"
-        placeholder="Nombre de usuario"
-        />
-        <input
-        id="password"
-        type="password"
-        formControlName="password"
-        class="input-text"
-        placeholder="Contraseña"
-        />
-        <input
-        id="reTypePassword"
-        type="password"
-        formControlName="reTypePassword"
-        class="input-text"
-        placeholder="Contraseña"
-        />
-        <a (click)="onRegister()" class="primary">Crear</a>
-        <a [routerLink]="['/login']" class="secondary">Regresar</a>
-    </form>
-  </div>
+  <h2>Registrar usuario</h2>
+  <form [formGroup]="signUpForm">
+    <input id="email" type="email" formControlName="email" class="input-text" placeholder="Email" />
+    <input
+    id="userName"
+    formControlName="userName"
+    type="text"
+    class="input-text"
+    placeholder="Nombre de usuario"
+    />
+    <input
+    id="password"
+    formControlName="password"
+    type="password"
+    class="input-text"
+    placeholder="Contraseña"
+    />
+    <input
+    id="rePassword"
+    formControlName="rePassword"
+    type="password"
+    class="input-text"
+    placeholder="Confirme la contraseña"
+    />
+  </form>
+  <a (click)="onResgister()" class="primary">Crear</a>
+  <a [routerLink]="['/login']" class="secondary">Regresar</a>
+</div>

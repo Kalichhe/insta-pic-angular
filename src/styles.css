@@ -28,22 +28,22 @@ body {
     padding: 20px;
   }
 
-.login-box {
+  .login-box {
     background-color: white;
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 400px;
-}
+    max-width: 400px;
+  }
 
-.login-box h2 {
+  .login-box h2 {
     color: #023047;
     text-align: center;
     margin-bottom: 20px;
-}
+  }
 
-.input-text {
-    background-color: #fff;
+  .input-text {
+    background-color: #ffffff;
     border: 2px solid #219ebc;
     color: #023047;
     padding: 10px;
@@ -52,14 +52,14 @@ body {
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 20px;
-}
+  }
 
-.input-text:focus {
+  .input-text:focus {
     border-color: #fb8500;
     outline: none;
-}
+  }
 
-.login-box a {
+  .login-box a{
     text-decoration: none;
     padding: 10px 20px;
     font-size: 16px;
@@ -67,103 +67,142 @@ body {
     color: white;
     display: block;
     text-align: center;
-}
+  }
 
-a.primary {
+  a.primary {
     background-color: #ffb703;
     margin-bottom: 20px;
     cursor: pointer;
-}
+  }
 
-a.primary:hover {
+  a.primary:hover {
     background-color: #d00000;
-}
-a.secondary {
+  }
+
+  a.secondary {
     background-color: #fb8500;
     cursor: pointer;
-}
+  }
 
-a.secondary:hover {
+  a.secondary:hover {
     background-color: #d00000;
-}
+  }
 
-nav ul {
+
+  nav ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     display: flex;
     align-items: flex-end;
     justify-content: space-around;
-}
+  }
 
-nav ul li {
+  nav ul li {
     display: inline;
     font-weight: bold;
-}
+  }
 
-nav ul li a {
+  nav ul li a {
     color: white;
     text-decoration: none;
-}
+  }
 
-nav ul li a:hover {
+  nav ul li a:hover{
     color: #023047;
-}
+  }
 
-ul li:first-child {
+  ul li:first-child {
     font-size: 1.5em;
-}
+  }
 
-#profile {
+  #profile{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 80%;
-}
+  }
 
-#profile img {
+  #profile img{
     width: 100px;
-    display: block;
     border-radius: 50px;
-}
+  }
 
-#profile div {
+  #profile div{
     text-align: center;
-}
+  }
 
-#profile div span {
+  #profile div span{
     display: block;
-}
+  }
 
-#profile div span:first-child {
+  #profile div span:first-child{
     font-size: 1.8em;
     font-weight: 900;
-}
+  }
 
-#gallery {
+  #gallery{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
-}
+  }
 
-#gallery img {
+  #gallery .gallery-item{
+    display: flex;
+    flex-direction: column;
+  }
+
+  #gallery img{
+    flex:1;
     width: 300px;
-    margin: 20px;
+    margin: 0 20px;
     padding: 5px;
     border: 1px solid #fff;
-}
+  }
 
-#gallery img:hover {
-    border-color: #fb8500;
+  #gallery img:hover{
+    border-color:#fb8500;
     opacity: 0.7;
-}
+  }
 
-.social-icons li + li {
+  .comments{
+    display: flex;
+    width: 320px;
+    justify-content: space-between;
+  }
+  .comments input, .comments a{
+    margin:10px;
+    color:#fb8500;
+  }
+
+  .comments a:hover{
+    color:#d00000;
+    cursor: pointer;
+  }
+
+  .comments input{
+    flex: 1;
+    margin-left: 30px;
+    background-color: #ffffff;
+    border: 1px solid #219ebc;
+    color: #023047;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  .comments input:focus {
+    border-color: #fb8500;
+    outline: none;
+  }
+
+  .social-icons li + li{
     margin-left: 50px;
-}
+  }
 
-@media (max-width: 590px) {
+  @media (max-width: 590px) {
     nav ul {
         flex-direction: column;
         align-items: center;
@@ -174,19 +213,21 @@ ul li:first-child {
         margin: 10px 0;
         text-align: center;
     }
-}
+  }
 
-@media (max-width: 490px) {
+  @media (max-width: 490px) {
+
     #profile {
         flex-direction: column;
         align-items: center;
         justify-content: center;
     }
-}
+  }
 
-@media only screen and (max-width: 900px) and (orientation: landscape) {
 
-    main {
+  @media only screen and (max-width: 900px) and (orientation: landscape) {
+
+    main{
         flex-direction: row;
         align-items: flex-start;
     }
@@ -194,13 +235,13 @@ ul li:first-child {
     #profile {
         flex-direction: column;
     }
-
-    #gallery {
+    #gallery{
         padding: 10px;
     }
 
-    #gallery img {
+    #gallery img{
         width: 300px;
         margin: 10px;
     }
-}
+
+  }

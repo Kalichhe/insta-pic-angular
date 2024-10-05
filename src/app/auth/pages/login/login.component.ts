@@ -1,48 +1,54 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { User } from '../../interfaces/user.interface';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
+import Swal from 'sweetalert2';
+import { SHARED_IMPORTS } from '../../../const/shared.modules';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [SHARED_IMPORTS],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
-    user:User = {
-        userName: '',
-        password: ''
-    };
 
-    loginForm = this.fb.group({
-        userName:[''],
-        password:['']
-    });
+  loginForm = this.fb.group({
+    userName:['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
+    password:['', [Validators.required]]
+  })
 
-    constructor(private fb:FormBuilder, private router:Router) { }
+  constructor(private readonly fb:FormBuilder, private readonly router: Router, private readonly userService: UserService){
 
-    onLogin(){
+  }
 
-        let userName = this.loginForm.value.userName;
-        let password = this.loginForm.value.password;
+  onLogin(){
 
-        if (!userName || !password) {
-            alert('Debe diligenciar los campos');
-            return;
-        }
-        const storedPassword = localStorage.getItem(userName.toLowerCase());
-
-        if (storedPassword === null) {
-            alert('Usuario no registrado');
-        } else if (storedPassword === password) {
-            alert('Inicio de sesión exitoso');
-            this.router.navigateByUrl('/home');
-        } else {
-            alert('Contraseña incorrecta');
-        }
+    console.log(this.loginForm);
+    if (!this.loginForm.valid) {
+      Swal.fire({
+        title:'Ingreso',
+        text:'Debe diligenciar todos los campos',
+        icon:'error'
+      });
+      return;
     }
+    let userName = this.loginForm.value.userName ?? '';
+    let password = this.loginForm.value.password ?? '';
+    let response = this.userService.login(userName, password);
+    if(response.success){
+      this.router.navigateByUrl('/home');
+    }else{
+      Swal.fire({
+        title:'Ingreso',
+        text:response.message,
+        icon:'error'
+      });
+    }
+
+  }
 
 }

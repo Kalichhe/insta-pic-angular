@@ -1,16 +1,27 @@
 <header>
-@if(true){
-    <h1>InstaPic</h1>
-}@else {
-    <nav>
-        <ul>
-            <li>InstaPic</li>
-            <li><a href="#">Inicio</a></li>
-            <li><a href="#">Mi perfil</a></li>
-            <li><a href="#">Buscar</a></li>
-            <li><a href="#">Nueva Publicacion</a></li>
-            <li><a [routerLink]="['/login']">Cerrar sesion</a></li>
-        </ul>
-    </nav>
-}
+  <!-- user().userName.length >= 0 -->
+  @if(false){
+  <nav aria-label="user">
+    <ul>
+      <li>InstaPIC</li>
+      <li><a [routerLink]="['/home']">Inicio</a></li>
+      <li><a [routerLink]="['/profile']">Mi perfil</a></li>
+      <li><a [routerLink]="['/search']">Buscar</a></li>
+      <li><a (click)="logout()">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+  } @else { @if (user().userName.length > 0) {
+  <nav aria-label="user">
+    <ul>
+      <li>InstaPIC</li>
+      <li><a [routerLink]="['/home']">Inicio</a></li>
+      <li><a [routerLink]="['/profile']">Mi perfil</a></li>
+      <li><a [routerLink]="['/search']">Buscar</a></li>
+      <li><a [routerLink]="['/new-post']">Nueva publicación</a></li>
+      <li><a (click)="logout()">Cerrar sesión</a></li>
+    </ul>
+  </nav>
+  } @else {
+  <h1>InstaPIC</h1>
+  } }
 </header>
