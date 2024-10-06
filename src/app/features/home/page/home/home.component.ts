@@ -76,10 +76,7 @@ export class HomeComponent {
       }
       return items;
     });
-    this.userService.updateGallery(
-      this.user().userName,
-      this.galleryItems()
-    );
+    this.userService.updateGallery(this.user().userName, this.galleryItems());
     input.value = '';
   }
 }

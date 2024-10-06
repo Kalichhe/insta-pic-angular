@@ -1,6 +1,5 @@
 <header>
-  <!-- user().userName.length >= 0 -->
-  @if(false){
+  @if(user().profileOwner === '' || user().profileOwner === 'no') {
   <nav aria-label="user">
     <ul>
       <li>InstaPIC</li>
@@ -10,7 +9,7 @@
       <li><a (click)="logout()">Cerrar sesión</a></li>
     </ul>
   </nav>
-  } @else { @if (user().userName.length > 0) {
+  } @else { @if (user().profileOwner === 'yes' || user().profileOwner === 'si') {
   <nav aria-label="user">
     <ul>
       <li>InstaPIC</li>

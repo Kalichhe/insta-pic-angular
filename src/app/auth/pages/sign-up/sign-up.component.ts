@@ -16,9 +16,22 @@ export class SignUpComponent {
 
   signUpForm = this.fb.group({
     email: [''],
-    userName:['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
-    password:['', [Validators.required]],
-    rePassword: ['']
+    userName:['', [
+      Validators.required,
+      Validators.minLength(8),
+       Validators.maxLength(12)
+      ]],
+    password:['',
+      [
+        Validators.required
+
+      ]],
+    rePassword: [''],
+    profileOwner: ['',
+      [
+        Validators.minLength(2),
+        Validators.maxLength(3)
+      ]]
   });
 
   constructor(private readonly fb:FormBuilder, private readonly router:Router, private readonly userService:UserService) {
@@ -37,6 +50,8 @@ export class SignUpComponent {
     let email = this.signUpForm.value.email ?? '';
     let password = this.signUpForm.value.password ?? '';
     let rePassword = this.signUpForm.value.rePassword ?? '';
+    let profileOwner = this.signUpForm.value.profileOwner ?? '';
+
     if (rePassword !== password) {
       Swal.fire({
         text:'Las constraseñas no coinciden',
@@ -45,8 +60,7 @@ export class SignUpComponent {
       return;
     }
 
-
-    let response = this.userService.register({userName, password, email})
+    let response = this.userService.register({userName, password, email, profileOwner})
     if(response.success){
       this.router.navigateByUrl('/home');
     }else{

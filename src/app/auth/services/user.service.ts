@@ -1,16 +1,21 @@
-import { Injectable, signal } from '@angular/core';
+import { GalleryItem } from '../../features/posts/interfaces/gallery-item.inteface';
 import { User } from '../interfaces/user.interface';
+import { Injectable, signal } from '@angular/core';
 import {
   LoginResponse,
   SignUpResponse,
 } from '../interfaces/login-response.interface';
-import { GalleryItem } from '../../features/posts/interfaces/gallery-item.inteface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  userSignal = signal<User>({ userName: '', password: '', email: '' });
+  userSignal = signal<User>({
+    userName: '',
+    password: '',
+    email: '',
+    profileOwner: '',
+  });
 
   login(userName: string, password: string): LoginResponse {
     if (typeof window !== 'undefined' && window.localStorage) {
@@ -39,7 +44,11 @@ export class UserService {
     if (typeof window !== 'undefined' && window.localStorage) {
       localStorage.removeItem('loggedUser');
     }
-    this.userSignal.set({ userName: '', email: '', password: '' });
+    this.userSignal.set({
+      userName: '',
+      email: '',
+      password: '',
+    });
   }
 
   saveImage(id: string, url: string, userName: string) {
@@ -60,9 +69,22 @@ export class UserService {
     }
   }
 
+  getGallery(userName: string): GalleryItem[] {
+    if (typeof window !== 'undefined' && window.localStorage) {
+      let galleryStr = localStorage.getItem(`imgs-${userName}`);
+      let gallery: GalleryItem[] = [];
+      if (galleryStr) {
+        gallery = JSON.parse(galleryStr);
+      }
+      return gallery;
+    } else {
+      return [];
+    }
+  }
+
   updateGallery(userName: string, gallery: GalleryItem[]) {
     if (typeof window !== 'undefined' && window.localStorage) {
-      localStorage.setItem(`gallery-${userName}`, JSON.stringify(gallery));
+      localStorage.setItem(`imgs-${userName}`, JSON.stringify(gallery));
     }
   }
 
@@ -109,31 +131,15 @@ export class UserService {
     localStorage.setItem(`gallery-${userName}`, JSON.stringify(gallery));
   }
 
-  getGallery(userName: string) {
-    if (typeof window !== "undefined" && window.localStorage) {
-      let galleryStr = localStorage.getItem(`gallery-${userName}`);
-      let gallery: GalleryItem[] = [];
-      if (galleryStr) {
-        gallery = JSON.parse(galleryStr);
-      }
-      return gallery;
-    } else {
-      return []; // En caso de que no esté disponible localStorage
-    }
-  }
-
-  saveProfile(profileUrl:string, userName:string) {
-
+  saveProfile(profileUrl: string, userName: string) {
     localStorage.setItem(`profile-${userName}`, profileUrl);
-
   }
 
   getProfile(userName: string) {
-    if (typeof window !== "undefined" && window.localStorage) {
+    if (typeof window !== 'undefined' && window.localStorage) {
       return localStorage.getItem(`profile-${userName}`) || '';
     } else {
       return '';
     }
   }
-
 }
